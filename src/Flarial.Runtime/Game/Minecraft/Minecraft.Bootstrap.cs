@@ -42,10 +42,10 @@ unsafe partial class Minecraft
         if (!IsInstalled)
             throw new MinecraftNotFoundException();
 
-        if (GetWindow() is { } foundWindow && foundWindow.IsVisible)
+        if (GetWindow() is { } minecraftWindow && minecraftWindow.IsVisible)
         {
-            foundWindow.Switch();
-            return foundWindow._processId;
+            minecraftWindow.Switch();
+            return minecraftWindow._processId;
         }
 
         if (Activate() is not { } processId)
