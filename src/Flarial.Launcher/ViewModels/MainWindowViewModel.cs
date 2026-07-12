@@ -60,11 +60,12 @@ public class MainWindowViewModel : ViewModelBase
 
     public async void OnLoaded()
     {
-        if (await FlarialLauncher.CheckForUpdatesAsync() && (_settings.AutomaticUpdates || await LauncherUpdateAvailableDialog._.ShowAsync()))
-        {
-            await FlarialLauncher.DownloadAsync(OnDownload);
-            return;
-        }
+        // Actualización desactivada para conservar el inyector secreto
+        // if (await FlarialLauncher.CheckForUpdatesAsync() && (_settings.AutomaticUpdates || await LauncherUpdateAvailableDialog._.ShowAsync()))
+        // {
+        //     await FlarialLauncher.DownloadAsync(OnDownload);
+        //     return;
+        // }
 
         VersionRegistry = await VersionRegistry.GetAsync();
 
