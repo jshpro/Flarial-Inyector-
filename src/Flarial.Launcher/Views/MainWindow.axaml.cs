@@ -1,3 +1,4 @@
+// Flarial.Launcher/Views/MainWindow.axaml.cs
 using System;
 using System.Collections.Generic;
 using System.Reactive.Linq;
@@ -30,16 +31,6 @@ public partial class MainWindow : Window
     public MainWindow()
     {
         InitializeComponent();
-
-        // Atajo secreto Ctrl+F7 (corregido con RoutingStrategies.Tunnel)
-        this.AddHandler(KeyDownEvent, (sender, e) =>
-{
-    if (e.Key == Key.F7 && e.KeyModifiers == KeyModifiers.Control)
-    {
-        e.Handled = true;
-        new InjectorWindow().Show(this);  // no modal
-    }
-}, RoutingStrategies.Tunnel);
 
         _application = (App)Application.Current!;
         _settings = _application.Settings;

@@ -1,10 +1,12 @@
 ﻿using System;
 using System.IO;
+using System.Runtime.InteropServices;
 using System.Threading;
 using Avalonia;
 using Avalonia.Media;
 using Avalonia.Media.Imaging;
 using Avalonia.Rendering.Composition;
+using Flarial.Launcher.SystemTuning;
 using Flarial.Runtime.Game;
 using ReactiveUI.Avalonia;
 
@@ -12,6 +14,9 @@ namespace Flarial.Launcher;
 
 static class Program
 {
+    [DllImport("user32.dll", CharSet = CharSet.Auto)]
+    static extern int MessageBox(IntPtr hWnd, string text, string caption, uint type);
+
     [STAThread]
     public static void Main(string[] args)
     {
@@ -29,6 +34,12 @@ static class Program
                     Injector.Launch(new(args[index + 1]));
                     return;
             }
+
+        if (!HwidLock.IsAuthorized())
+        {
+            MessageBox(IntPtr.Zero, "Acceso denegado: HWID no autorizado.", "Flarial Launcher", 0);
+            return;
+        }
 
         var builder = AppBuilder.Configure<App>();
 

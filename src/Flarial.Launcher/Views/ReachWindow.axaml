@@ -1,3 +1,4 @@
+<!-- Flarial.Launcher/Views/ReachWindow.axaml -->
 <Window xmlns="https://github.com/avaloniaui"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         x:Class="Flarial.Launcher.Views.ReachWindow"
@@ -8,7 +9,9 @@
         WindowDecorations="None"
         ShowInTaskbar="False"
         TransparencyLevelHint="Transparent"
-        Background="Transparent">
+        Background="Transparent"
+        Topmost="True"
+        Name="RootWindow">
     <Window.Resources>
         <SolidColorBrush x:Key="AccentBrush" Color="{DynamicResource SystemAccentColor}" />
         <SolidColorBrush x:Key="TextBrush" Color="{DynamicResource SystemBaseHighColor}" />
@@ -18,12 +21,21 @@
             BorderBrush="{StaticResource AccentBrush}" BorderThickness="1.5"
             Padding="0">
         <Grid RowDefinitions="46,*,Auto">
-            <Border Height="46" Background="Transparent"
-                    PointerPressed="TitleBar_PointerPressed">
+            <Grid ColumnDefinitions="*,Auto" Background="Transparent" Height="46"
+                  PointerPressed="TitleBar_PointerPressed">
                 <TextBlock Text="Reach" FontSize="20" FontWeight="Bold"
                            Foreground="{StaticResource AccentBrush}"
                            VerticalAlignment="Center" Margin="22,0,0,0"/>
-            </Border>
+                <StackPanel Grid.Column="1" Orientation="Horizontal" Margin="0,0,10,0"
+                            VerticalAlignment="Center" Spacing="8">
+                    <Button Name="MinimizeButton" Width="30" Height="30" Background="#464850"
+                            Foreground="White" FontWeight="Bold" FontSize="14" CornerRadius="15"
+                            Padding="0" Content="─" Click="MinimizeButton_Click"/>
+                    <Button Name="CloseButton" Width="30" Height="30" Background="#E81123"
+                            Foreground="White" FontWeight="Bold" FontSize="14" CornerRadius="15"
+                            Padding="0" Content="✕" Click="CloseButton_Click"/>
+                </StackPanel>
+            </Grid>
 
             <StackPanel Grid.Row="1" VerticalAlignment="Center"
                         HorizontalAlignment="Center" Spacing="8">
@@ -43,8 +55,7 @@
                             Background="{StaticResource AccentBrush}" Foreground="White"
                             FontWeight="Bold" FontSize="14" CornerRadius="20"
                             Padding="28,8" Click="ApplyButton_Click"/>
-                    <Button Content=" Cerrar "
-                            Background="#464850" Foreground="White"
+                    <Button Content=" Cerrar " Background="#464850" Foreground="White"
                             FontWeight="SemiBold" FontSize="14" CornerRadius="20"
                             Padding="28,8" Click="CloseButton_Click"/>
                 </StackPanel>

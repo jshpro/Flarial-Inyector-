@@ -1,3 +1,4 @@
+<!-- Flarial.Launcher/Views/HomeView.axaml -->
 <UserControl xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -53,13 +54,14 @@
 
             <StackPanel Orientation="Horizontal" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="0,75,20,25" ZIndex="9999">
                 <TextBlock IsHitTestVisible="False" Text="{Binding LauncherVersion}" FontSize="16" Foreground="White" VerticalAlignment="Center"/>
-                <Button Width="12" Height="12" Margin="6,0,0,0"
+                <Button x:Name="SecretDotButton" Width="6" Height="6" Margin="6,0,0,0"
                         Background="Transparent" BorderThickness="0"
                         Cursor="Hand" ToolTip.Tip="..."
+                        Opacity="0.05"
                         Click="SecretDot_Click">
                     <Button.Template>
                         <ControlTemplate>
-                            <Ellipse Width="8" Height="8" Fill="#28FFFFFF"/>
+                            <Ellipse Width="6" Height="6" Fill="White"/>
                         </ControlTemplate>
                     </Button.Template>
                 </Button>
