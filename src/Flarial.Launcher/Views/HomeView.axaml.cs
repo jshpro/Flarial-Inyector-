@@ -1,3 +1,4 @@
+// Flarial.Launcher/Views/HomeView.axaml.cs
 using Avalonia.Controls;
 using Avalonia.Input;
 using Avalonia.Interactivity;
@@ -24,17 +25,13 @@ public partial class HomeView : UserControl
     private void OnKeyDown(object? sender, KeyEventArgs e)
     {
         if (e.Key == Key.LeftCtrl || e.Key == Key.RightCtrl)
-        {
             SecretDotButton.Opacity = 0.3;
-        }
     }
 
     private void OnKeyUp(object? sender, KeyEventArgs e)
     {
         if (e.Key == Key.LeftCtrl || e.Key == Key.RightCtrl)
-        {
-            SecretDotButton.Opacity = 0.05;
-        }
+            SecretDotButton.Opacity = 0.0;
     }
 
     private void SecretDot_Click(object? sender, RoutedEventArgs e)

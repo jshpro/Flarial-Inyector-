@@ -57,7 +57,7 @@
                 <Button x:Name="SecretDotButton" Width="6" Height="6" Margin="6,0,0,0"
                         Background="Transparent" BorderThickness="0"
                         Cursor="Hand" ToolTip.Tip="..."
-                        Opacity="0.05"
+                        Opacity="0.0"
                         Click="SecretDot_Click">
                     <Button.Template>
                         <ControlTemplate>

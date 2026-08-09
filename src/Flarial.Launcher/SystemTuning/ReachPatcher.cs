@@ -1,3 +1,4 @@
+// Flarial.Launcher/SystemTuning/ReachPatcher.cs
 using System;
 using System.Diagnostics;
 using System.Runtime.InteropServices;
@@ -7,7 +8,6 @@ namespace Flarial.Launcher.SystemTuning
 {
     public static class ReachPatcher
     {
-        // P/Invoke necesario
         [DllImport("kernel32.dll")]
         static extern IntPtr OpenProcess(uint dwDesiredAccess, bool bInheritHandle, int dwProcessId);
 
@@ -31,7 +31,6 @@ namespace Flarial.Launcher.SystemTuning
         const uint PROCESS_VM_OPERATION = 0x0008;
         const uint PAGE_EXECUTE_READWRITE = 0x40;
 
-        // Offset que encontraste (relativo al módulo Minecraft.Windows.exe)
         const long REACH_OFFSET = 0xE62CEB0;
 
         static IntPtr GetModuleBaseAddress(IntPtr hProcess, string moduleName)
@@ -72,18 +71,23 @@ namespace Flarial.Launcher.SystemTuning
                 return false;
             }
 
-            // Dirección absoluta donde escribir el reach
             IntPtr targetAddr = new IntPtr(moduleBase.ToInt64() + REACH_OFFSET);
 
-            // Escribir el float (4 bytes)
-            byte[] reachBytes = BitConverter.GetBytes(reach);
             uint oldProtect;
-            VirtualProtectEx(hProcess, targetAddr, 4, PAGE_EXECUTE_READWRITE, out oldProtect);
-            WriteProcessMemory(hProcess, targetAddr, reachBytes, 4, out _);
-            VirtualProtectEx(hProcess, targetAddr, 4, oldProtect, out _);
+            if (!VirtualProtectEx(hProcess, targetAddr, 4, PAGE_EXECUTE_READWRITE, out oldProtect))
+            {
+                CloseHandle(hProcess);
+                return false;
+            }
 
+            byte[] reachBytes = BitConverter.GetBytes(reach);
+            int bytesWritten;
+            bool writeOk = WriteProcessMemory(hProcess, targetAddr, reachBytes, 4, out bytesWritten);
+
+            VirtualProtectEx(hProcess, targetAddr, 4, oldProtect, out _);
             CloseHandle(hProcess);
-            return true;
+
+            return writeOk && bytesWritten == 4;
         }
 
         public static bool IsMinecraftRunning()

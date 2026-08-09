@@ -9,9 +9,7 @@
         WindowDecorations="None"
         ShowInTaskbar="False"
         TransparencyLevelHint="Transparent"
-        Background="Transparent"
-        Topmost="True"
-        Name="RootWindow">
+        Background="Transparent">
     <Window.Resources>
         <SolidColorBrush x:Key="AccentBrush" Color="{DynamicResource SystemAccentColor}" />
         <SolidColorBrush x:Key="TextBrush" Color="{DynamicResource SystemBaseHighColor}" />
