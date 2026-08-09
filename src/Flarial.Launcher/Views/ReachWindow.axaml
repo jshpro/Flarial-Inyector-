@@ -1,0 +1,58 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        x:Class="Flarial.Launcher.Views.ReachWindow"
+        Title="Reach Config"
+        Width="380" Height="210"
+        WindowStartupLocation="CenterOwner"
+        CanResize="False"
+        WindowDecorations="None"
+        ShowInTaskbar="False"
+        TransparencyLevelHint="Transparent"
+        Background="Transparent">
+    <Window.Resources>
+        <SolidColorBrush x:Key="AccentBrush" Color="{DynamicResource SystemAccentColor}" />
+        <SolidColorBrush x:Key="TextBrush" Color="{DynamicResource SystemBaseHighColor}" />
+    </Window.Resources>
+
+    <Border Background="#E812141A" CornerRadius="14"
+            BorderBrush="{StaticResource AccentBrush}" BorderThickness="1.5"
+            Padding="0">
+        <Grid RowDefinitions="46,*,Auto">
+            <Border Height="46" Background="Transparent"
+                    PointerPressed="TitleBar_PointerPressed">
+                <TextBlock Text="Reach" FontSize="20" FontWeight="Bold"
+                           Foreground="{StaticResource AccentBrush}"
+                           VerticalAlignment="Center" Margin="22,0,0,0"/>
+            </Border>
+
+            <StackPanel Grid.Row="1" VerticalAlignment="Center"
+                        HorizontalAlignment="Center" Spacing="8">
+                <TextBlock Text="Valor de Reach (max 7.0)" FontSize="13"
+                           Foreground="{StaticResource TextBrush}"
+                           HorizontalAlignment="Center"/>
+                <TextBox Name="ReachTextBox" Width="140" Height="28"
+                         Text="3.0" FontSize="14" TextAlignment="Center"
+                         Foreground="White" Background="#282A36"
+                         BorderBrush="{StaticResource AccentBrush}"
+                         BorderThickness="1" CornerRadius="5"/>
+                <TextBlock Name="StatusText" FontSize="12"
+                           Foreground="#A0A0A8" HorizontalAlignment="Center"/>
+
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Spacing="10">
+                    <Button Name="ApplyButton" Content=" Aplicar "
+                            Background="{StaticResource AccentBrush}" Foreground="White"
+                            FontWeight="Bold" FontSize="14" CornerRadius="20"
+                            Padding="28,8" Click="ApplyButton_Click"/>
+                    <Button Content=" Cerrar "
+                            Background="#464850" Foreground="White"
+                            FontWeight="SemiBold" FontSize="14" CornerRadius="20"
+                            Padding="28,8" Click="CloseButton_Click"/>
+                </StackPanel>
+            </StackPanel>
+
+            <TextBlock Grid.Row="2" Text="Made by Joshhh"
+                       FontSize="10" Foreground="#787882"
+                       HorizontalAlignment="Center" Margin="0,8"/>
+        </Grid>
+    </Border>
+</Window>

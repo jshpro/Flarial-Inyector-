@@ -17,9 +17,7 @@
     <Grid>
         <Border IsHitTestVisible="False" Name="MainBorder" Background="{StaticResource BackgroundColor}" CornerRadius="25">
             <Grid>
-
                 <Image Margin="0,75,0,75" HorizontalAlignment="Center" Stretch="UniformToFill" Grid.Row="0" Source="/Assets/v2bg.webp"/>
-
                 <Grid Margin="0,70,0,0" VerticalAlignment="Top" Height="150">
                     <Grid.Background>
                         <LinearGradientBrush StartPoint="50%, 0%" EndPoint="50%, 100%">
@@ -28,7 +26,6 @@
                         </LinearGradientBrush>
                     </Grid.Background>
                 </Grid>
-
                 <Grid Margin="0,0,0,70" VerticalAlignment="Bottom" Height="150">
                     <Grid.Background>
                         <LinearGradientBrush StartPoint="50%, 0%" EndPoint="50%, 100%">
@@ -37,8 +34,6 @@
                         </LinearGradientBrush>
                     </Grid.Background>
                 </Grid>
-
-                <!--Flarial Logo-->
                 <Grid Margin="20" VerticalAlignment="Top" HorizontalAlignment="Stretch" ColumnDefinitions="Auto,Auto">
                     <Image Source="/Assets/app.ico" Height="40" Width="40" Margin="0" RenderOptions.BitmapInterpolationMode="HighQuality"/>
                     <TextBlock Grid.Column="1" Margin="10,0,0,0" Text="Flarial Client" FontWeight="Medium" VerticalAlignment="Center" FontSize="22" Foreground="White"/>
@@ -47,7 +42,6 @@
         </Border>
 
         <Grid>
-            <!--Window State Buttons-->
             <StackPanel Orientation="Horizontal" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="0,20,20,0">
                 <Button x:Name="MinimizeButton" Classes="MinimizeButton" Command="{Binding MinimizeWindow}"/>
                 <Button x:Name="CloseButton" Classes="CloseButton" Command="{Binding CloseWindow}"/>
@@ -57,16 +51,26 @@
                 <TextBlock TextAlignment="Left" IsHitTestVisible="False" Name="VersionLabel" Margin="10,5,10,5" Text="{Binding GameVersion}" FontSize="16" Foreground="White"/>
             </Border>
 
-            <TextBlock VerticalAlignment="Top" HorizontalAlignment="Right"  TextAlignment="Left" IsHitTestVisible="False" Margin="0,75,20,25" Text="{Binding LauncherVersion}" FontSize="16" Foreground="White"/>
+            <StackPanel Orientation="Horizontal" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="0,75,20,25" ZIndex="9999">
+                <TextBlock IsHitTestVisible="False" Text="{Binding LauncherVersion}" FontSize="16" Foreground="White" VerticalAlignment="Center"/>
+                <Button Width="12" Height="12" Margin="6,0,0,0"
+                        Background="Transparent" BorderThickness="0"
+                        Cursor="Hand" ToolTip.Tip="..."
+                        Click="SecretDot_Click">
+                    <Button.Template>
+                        <ControlTemplate>
+                            <Ellipse Width="8" Height="8" Fill="#28FFFFFF"/>
+                        </ControlTemplate>
+                    </Button.Template>
+                </Button>
+            </StackPanel>
 
-            <!--Launcher Version + License Indicator-->
             <Grid IsVisible="False" Height="45" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="20,75,0,0" RowDefinitions="*,*" ColumnDefinitions="*,Auto">
                 <TextBlock Name="LicenseText" Grid.Column="0" Margin="0,0,0,0" Text="⚫" VerticalAlignment="Center" HorizontalAlignment="Right" FontSize="16" Foreground="Gray"/>
                 <TextBlock Name="LauncherVersion" Grid.Row="0" Grid.Column="1" Margin="5,0,0,0" Text="{Binding LauncherVersion}" VerticalAlignment="Center" HorizontalAlignment="Right" FontSize="16" Foreground="White"/>
                 <TextBlock Name="StatusLabel" Grid.Row="1" Grid.ColumnSpan="2" Grid.Column="0" Margin="0,0,0,0" Text="Ready!" HorizontalAlignment="Right" VerticalAlignment="Center" FontSize="16" Foreground="#797676"/>
             </Grid>
 
-            <!--Center Content and Buttons-->
             <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
                 <TextBlock Name="GreetingLabel" Margin="0,0,0,0" Text="Welcome!" HorizontalAlignment="Center" FontSize="28" Foreground="White"/>
                 <TextBlock Margin="0,0,0,0" Text="{Binding LauncherStatus}" HorizontalAlignment="Center" FontSize="18" Foreground="DarkGray" />
